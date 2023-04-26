@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.4",
+    "@element-plus/nuxt": "^1.0.4",
     "@iconify-json/carbon": "^1.1.16",
     "@iconify-json/twemoji": "^1.1.11",
     "@nuxt/devtools": "^0.4.0",
@@ -27,9 +28,12 @@
     "@vite-pwa/nuxt": "^0.0.7",
     "@vueuse/nuxt": "^9.13.0",
     "consola": "^3.0.1",
+    "element-plus": "^2.3.4",
     "eslint": "^8.38.0",
+    "midjourney": "^1.0.10",
     "nuxt": "^3.4.0",
     "pinia": "^2.0.34",
+    "sass": "^1.62.1",
     "typescript": "^4.9.5"
   }
 }

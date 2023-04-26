@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@unocss/nuxt',
     '@pinia/nuxt',
+    '@element-plus/nuxt',
     '@nuxtjs/color-mode',
     '@vite-pwa/nuxt',
   ],
@@ -59,5 +60,10 @@ export default defineNuxtConfig({
 
   devtools: {
     enabled: true,
+  },
+
+  elementPlus: {
+    icon: 'ElIcon',
+    importStyle: 'scss',
   },
 })
