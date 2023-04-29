@@ -19,5 +19,6 @@ const online = useOnline()
       </template>
     </Suspense>
     <InputEntry />
+    <ToolCardList />
   </div>
 </template>
