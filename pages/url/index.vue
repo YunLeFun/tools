@@ -59,16 +59,16 @@ function handleDelete(scope: {
     <el-table-column label="操作" width="250">
       <template #default="scope">
         <el-button type="success" @click="handleEnter(scope)">
-          进入
+          GO
         </el-button>
-        <el-button type="primary" @click="handleEdit(scope)">
+        <!-- <el-button type="primary" @click="handleEdit(scope)">
           编辑
-        </el-button>
+        </el-button> -->
 
         <el-popconfirm title="Are you sure to delete this?" @confirm="handleDelete(scope)">
           <template #reference>
             <el-button type="danger">
-              删除
+              <div i-ri-delete-bin-line />
             </el-button>
           </template>
         </el-popconfirm>

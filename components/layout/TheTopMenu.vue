@@ -20,11 +20,9 @@ function handleSelect(key: string, keyPath: string[]) {
       </el-icon>
     </el-menu-item>
     <div class="flex-grow" />
-    <el-menu-item index="1">
-      <a href="https://github.com/YunLeFun/tools" target="_blank">
-        <div i-ri-github-line />
-      </a>
-    </el-menu-item>
+    <a class="inline-flex items-center justify-center" h-full w-15 href="https://github.com/YunLeFun/tools" target="_blank">
+      <div i-ri-github-line />
+    </a>
     <!-- <el-sub-menu index="2">
       <template #title>
         Workspace

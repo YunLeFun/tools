@@ -38,9 +38,9 @@ export const useUrlStore = defineStore('url', () => {
           value: 'https://yunyoujun.cn',
         },
       ],
-      script: `
-export const name = '示例'
+      script: `export const name = '示例'
 export const url = 'https://example.com'
+
 export const params = [
   {
     label: '时间节点',

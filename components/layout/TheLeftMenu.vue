@@ -28,7 +28,7 @@ const menuItems = [
   // },
   {
     title: 'URL',
-    icon: 'i-ri-qr-code-line',
+    icon: 'i-ri-link',
     index: '/url',
   },
   {
