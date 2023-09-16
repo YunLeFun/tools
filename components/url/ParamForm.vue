@@ -92,7 +92,7 @@ const qrcode = useQRCode(url)
             v-model="paramItem.value"
             placeholder="请输入网址"
           />
-          <div v-if="paramItem.choices" m-2 flex items-center justify-center>
+          <div v-if="paramItem.choices" mx-2 flex items-center justify-center>
             <el-radio-group v-model="paramItem.value">
               <el-radio
                 v-for="choice in paramItem.choices" :key="choice.value"

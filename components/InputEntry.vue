@@ -22,13 +22,13 @@ function go() {
       @keydown.enter="go"
     >
     <div>
-      <button
-        m-3 text-sm btn
+      <el-button
+        m-3 text-sm
         :disabled="!name"
         @click="go"
       >
         GO
-      </button>
+      </el-button>
     </div>
   </div>
 </template>
