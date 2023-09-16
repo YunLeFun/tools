@@ -55,7 +55,7 @@ export const useUrlStore = defineStore('url', () => {
 
     tableData.value.push({
       name: `Untitled-${order}`,
-      url: 'https://example.com',
+      url: `https://example.com/${order}`,
       params: [],
       script: '',
     })

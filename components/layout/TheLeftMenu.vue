@@ -33,7 +33,7 @@ const menuItems = [
   },
   {
     title: 'TS',
-    icon: 'i-vscode-icons:file-type-typescript',
+    icon: 'i-simple-icons:typescript',
     index: '/ts',
   },
   {

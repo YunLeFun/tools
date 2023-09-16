@@ -84,6 +84,7 @@ const qrcode = useQRCode(url)
           <el-date-picker
             v-else-if="paramItem.type === 'datetime'"
             v-model="paramItem.value"
+            value-format="YYYY-MM-DD HH:mm:ss"
             type="datetime"
           />
           <el-input
