@@ -4,7 +4,7 @@ const online = useOnline()
 
 <template>
   <div>
-    <Logos mb-6 />
+    <YlfLogo />
     <Suspense>
       <ClientOnly>
         <PageView v-if="online" />

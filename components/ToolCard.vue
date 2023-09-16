@@ -11,7 +11,7 @@ defineProps<{
 
 <template>
   <div>
-    <RouterLink :to="tool.path">
+    <RouterLink :to="tool.path" border>
       {{ tool.name }}
     </RouterLink>
   </div>

@@ -1,0 +1,10 @@
+<template>
+  <div>
+    <h2>
+      关于
+    </h2>
+    <div>
+      工具箱
+    </div>
+  </div>
+</template>

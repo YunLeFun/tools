@@ -13,7 +13,7 @@ function go() {
     <input
       id="input"
       v-model="name"
-      placeholder="What's your name?"
+      placeholder="Search Tools..."
       type="text" autocomplete="off"
       p="x-4 y-2" m="t-5" w="250px"
       text="center" bg="transparent"
