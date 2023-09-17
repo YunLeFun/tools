@@ -1,7 +1,9 @@
 <script lang="ts" setup>
+import consola from 'consola'
+
 const activeIndex = ref('1')
 function handleSelect(key: string, keyPath: string[]) {
-  console.log(key, keyPath)
+  consola.log(key, keyPath)
 }
 </script>
 

@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { ElDialog } from 'element-plus'
-
 const url = useUrlStore()
 
 const router = useRouter()

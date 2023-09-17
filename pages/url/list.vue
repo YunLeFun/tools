@@ -44,11 +44,13 @@ watch(() => urlItem.value?.script, (script) => {
   catch {
     consola.log('compile error')
   }
+}, {
+  immediate: true,
 })
 </script>
 
 <template>
   <div>
-    <ParamForm :url-item="urlItem" />
+    <ParamForm v-if="urlItem" :url-item="urlItem" />
   </div>
 </template>

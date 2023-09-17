@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import { useQRCode } from '@vueuse/integrations/useQRCode'
+import * as monaco from 'monaco-editor'
 import type { BaseParamItem, UrlItem } from '~/types'
+
+import urlTypeRawContent from '~/types/url?raw'
 
 const props = defineProps<{
   urlItem: UrlItem
@@ -8,12 +11,18 @@ const props = defineProps<{
 
 const curParams = computed(() => props.urlItem.params)
 
+const content = urlTypeRawContent.replaceAll('export ', '')
+monaco.languages.typescript.typescriptDefaults.addExtraLib(
+  content,
+  'url.d.ts',
+)
+
 const url = computed(() => {
   const params = new URLSearchParams()
 
   curParams.value.forEach((item) => {
     if (typeof item.visible === 'undefined' || item.visible)
-      params.append(item.key, item.value)
+      params.append(item.key, item.value.toString())
 
     //   params.append(item.key, item.value)
     // console.log(item)
@@ -44,6 +53,7 @@ const qrcode = useQRCode(url)
 </script>
 
 <template>
+  <!-- eslint-disable vue/no-mutating-props -->
   <div>
     <h2 font="bold">
       {{ props.urlItem?.name }}
@@ -51,11 +61,11 @@ const qrcode = useQRCode(url)
 
     <figure mb-6 mt-2 text-center flex="~ col">
       <div m-auto mb-4 h-50 w-50 flex items-center justify-center shadow>
-        <img v-if="qrcode" :src="qrcode" alt="QR Code">
+        <img v-if="qrcode" h-full w-full :src="qrcode" alt="QR Code">
       </div>
       <div op="70" m-auto w-full flex justify-center text-xs>
         <span>{{ url }}</span>
-        <div i-ri-file-copy-line active:i-ri-file-copy-fill ml-2 cursor-pointer @click="copyUrl()" />
+        <div i-ri-file-copy-line ml-2 cursor-pointer active:i-ri-file-copy-fill @click="copyUrl()" />
       </div>
     </figure>
     <!-- <img class="w-50" m-auto my-4 :src="qrcode" alt="QR Code"> -->
@@ -109,7 +119,7 @@ const qrcode = useQRCode(url)
         v-model="urlItem.script"
         class="h-800px w-1/2 border text-left"
         lang="typescript"
-        :options="{ tabSize: 2 }"
+        :options="{ tabSize: 2, formatOnType: true, formatOnPaste: true }"
       />
     </div>
 

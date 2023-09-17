@@ -3,6 +3,38 @@ import { useStorage } from '@vueuse/core'
 
 import type { UrlItem } from '~/types'
 
+export const exampleParamsScript = `
+export const params: ParamItem[] = [
+  {
+    label: '时间节点',
+    key: 'timeNode',
+    type: 'datetime',
+    value: '2023-09-15 00:00:00',
+    choices: [
+      {
+        label: '交换礼物日',
+        value: '2023-08-01 06:00:00',
+      },
+      {
+        label: '小云生日',
+        value: '2022-07-30 00:00:00',
+      },
+    ],
+  },
+  {
+    label: '你今天开心吗',
+    key: 'happy',
+    type: 'boolean',
+    value: false,
+  },
+  {
+    label: '博客地址',
+    key: 'blog',
+    type: 'string',
+    value: 'https://yunyoujun.cn',
+  },
+]`
+
 export const useUrlStore = defineStore('url', () => {
   const tableData = useStorage<UrlItem[]>('ylf:tools:url:table', [
     {
@@ -40,37 +72,7 @@ export const useUrlStore = defineStore('url', () => {
       ],
       script: `export const name = '示例'
 export const url = 'https://example.com'
-
-export const params = [
-  {
-    label: '时间节点',
-    key: 'timeNode',
-    type: 'datetime',
-    value: '2023-09-15 00:00:00',
-    choices: [
-      {
-        label: '交换礼物日',
-        value: '2023-08-01 06:00:00',
-      },
-      {
-        label: '小云生日',
-        value: '2022-07-30 00:00:00',
-      },
-    ],
-  },
-  {
-    label: '你今天开心吗',
-    key: 'happy',
-    type: 'boolean',
-    value: false,
-  },
-  {
-    label: '博客地址',
-    key: 'blog',
-    type: 'string',
-    value: 'https://yunyoujun.cn',
-  },
-]
+${exampleParamsScript}
 `,
     },
   ])
@@ -91,7 +93,10 @@ export const params = [
       name: `Untitled-${order}`,
       url: `https://example.com/${order}`,
       params: [],
-      script: '',
+      script: `export const name = 'Untitled-${order}'
+export const url = 'https://example.com/${order}'
+${exampleParamsScript}
+`,
     })
   }
 
