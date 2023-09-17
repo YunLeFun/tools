@@ -1,4 +1,4 @@
-export interface BaseParamItem {
+export interface BaseParamItem<T = string> {
   /**
    * 显示的名称
    */
@@ -12,34 +12,35 @@ export interface BaseParamItem {
    */
   visible?: boolean
   /**
-   * 可选的值
+   * 默认值
+   */
+  value: T
+  /**
+   * 可选项
    */
   choices?: {
     label: string
-    value: string
+    value: T
   }[]
   /**
    * 可选 query 类型
    */
-  type: 'boolean' | 'string' | 'datetime'
+  type: BooleanParamItem['type'] | StringParamItem['type'] | DatetimeParamItem['type']
 }
 
-export interface BooleanParamItem extends BaseParamItem {
+export interface BooleanParamItem extends BaseParamItem<boolean> {
   type: 'boolean'
-  value: boolean
 }
 
-export interface StringParamItem extends BaseParamItem {
+export interface StringParamItem extends BaseParamItem<string> {
   type: 'string'
-  value: string
 }
 
-export interface DatetimeParamItem extends BaseParamItem {
+export interface DatetimeParamItem extends BaseParamItem<string> {
   /**
    * 日期时间类型 YYYY-MM-DD HH:mm:ss
    */
   type: 'datetime'
-  value: string
 }
 
 export type ParamItem = BooleanParamItem | StringParamItem | DatetimeParamItem
