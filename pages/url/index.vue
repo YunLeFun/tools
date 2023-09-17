@@ -17,16 +17,16 @@ function handleEnter(scope: {
   })
 }
 
-function handleEdit(scope: {
+const source = ref('')
+const { copy } = useClipboard({ source })
+
+function handleCopy(scope: {
   $index: number
   row: any
 }) {
-  router.push({
-    path: '/url/edit',
-    query: {
-      index: scope.$index,
-    },
-  })
+  source.value = scope.row.script
+  copy()
+  ElMessage.success('复制成功')
 }
 function handleDelete(scope: {
   $index: number
@@ -48,22 +48,24 @@ function handleDelete(scope: {
     <!-- <el-table-column prop="key" label="Key" width="180" /> -->
     <el-table-column prop="name" label="Name" width="180">
       <template #default="scope">
-        <el-input v-model="scope.row.name" />
+        <!-- <el-input v-model="scope.row.name" /> -->
+        {{ scope.row.name }}
       </template>
     </el-table-column>
     <el-table-column prop="url" label="URL">
       <template #default="scope">
-        <el-input v-model="scope.row.url" />
+        <!-- <el-input v-model="scope.row.url" /> -->
+        {{ scope.row.url }}
       </template>
     </el-table-column>
     <el-table-column label="操作" width="250">
       <template #default="scope">
         <el-button type="success" @click="handleEnter(scope)">
-          GO
+          <div i-ri-edit-line />
         </el-button>
-        <!-- <el-button type="primary" @click="handleEdit(scope)">
-          编辑
-        </el-button> -->
+        <el-button type="primary" @click="handleCopy(scope)">
+          <div i-ri-file-copy-2-line />
+        </el-button>
 
         <el-popconfirm title="Are you sure to delete this?" @confirm="handleDelete(scope)">
           <template #reference>

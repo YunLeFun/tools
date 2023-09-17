@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { ModuleKind, ScriptTarget, transpileModule } from 'typescript'
+import { useStorage } from '@vueuse/core'
 
-const editorValue = ref('')
+const editorValue = useStorage('ylf:tools:ts', '')
 
 const result = computed(() => {
   const compilerOptions = {
