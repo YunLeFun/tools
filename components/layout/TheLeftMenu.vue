@@ -37,6 +37,11 @@ const menuItems = [
     index: '/ts',
   },
   {
+    title: 'Midjourney',
+    icon: 'i-ri-ship-2-line',
+    index: '/midjourney',
+  },
+  {
     title: 'Settings',
     icon: 'i-ri-settings-line',
     index: '/settings',

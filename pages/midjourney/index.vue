@@ -2,6 +2,7 @@
 import consola from 'consola'
 import { useStorage } from '@vueuse/core'
 import type { Midjourney } from 'midjourney'
+import type { UploadProps, UploadUserFile } from 'element-plus'
 import { createClient } from '~/utils/midjourney'
 
 const SERVER_ID = useStorage('midjourney-server-id', '')
@@ -87,6 +88,55 @@ async function imagineAll() {
     })
   })
 }
+
+const fileList = ref<UploadUserFile[]>([
+  {
+    name: 'avatar.jpg',
+    url: 'https://yunyoujun.cn/images/avatar.jpg',
+  },
+])
+
+const dialogImageUrl = ref('')
+const dialogVisible = ref(false)
+
+const handleRemove: UploadProps['onRemove'] = (uploadFile, uploadFiles) => {
+  // eslint-disable-next-line no-console
+  console.log(uploadFile, uploadFiles)
+}
+
+const curImgUrl = ref('')
+const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile) => {
+  dialogImageUrl.value = uploadFile.url!
+
+  curImgUrl.value = uploadFile.url!
+  consola.info(curImgUrl.value)
+
+  dialogVisible.value = true
+}
+
+function handleSuccess(_response: any, file: UploadUserFile, _fileList: UploadUserFile[]) {
+  // console.log('response', response)
+  // console.log('file', file)
+  // console.log('fileList', fileList)
+  curImgUrl.value = file.url || ''
+}
+
+function handleChange(file: UploadUserFile, _fileList: UploadUserFile[]) {
+  // console.log('file', file)
+  // console.log('fileList', fileList)
+  consola.info(file)
+  curImgUrl.value = file.url || ''
+}
+
+async function describe() {
+  if (!client.value) {
+    ElMessage.error('Client is not created')
+    return
+  }
+
+  const data = await client.value?.Describe(curImgUrl.value)
+  consola.info(data)
+}
 </script>
 
 <template>
@@ -108,6 +158,26 @@ async function imagineAll() {
         </el-button>
       </el-form-item>
     </el-form>
+
+    <div class="py-4" />
+
+    <el-upload
+      v-model:file-list="fileList"
+      list-type="picture-card"
+      :on-preview="handlePictureCardPreview"
+      :on-remove="handleRemove"
+      :on-success="handleSuccess"
+      :on-change="handleChange"
+      :auto-upload="false"
+    >
+      <el-icon>
+        <i class="i-ep-plus inline-flex text-xl" />
+      </el-icon>
+    </el-upload>
+
+    <el-button @click="describe">
+      Describe
+    </el-button>
 
     <div class="py-4" />
 
