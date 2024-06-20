@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useQRCode } from '@vueuse/integrations/useQRCode'
 import * as monaco from 'monaco-editor'
-import type { BaseParamItem, ParamItem, UrlItem } from '~/types'
+import type { ParamItem, UrlItem } from '~/types'
 
 import urlTypeRawContent from '~/types/url?raw'
 

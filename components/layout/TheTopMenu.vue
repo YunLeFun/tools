@@ -59,12 +59,11 @@ function handleSelect(key: string, keyPath: string[]) {
 <style lang="scss">
 // https://github.com/element-plus/element-plus/pull/14307
 .el-menu-horizontal {
-
 }
 
 .navbar {
   z-index: 1;
-  background-image: radial-gradient(transparent 1px,var(--el-bg-color) 1px);
+  background-image: radial-gradient(transparent 1px, var(--el-bg-color) 1px);
   backdrop-filter: saturate(50%) blur(4px);
 
   height: 60px;

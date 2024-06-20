@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 import consola from 'consola'
 import { useStorage } from '@vueuse/core'
+import type { Midjourney } from 'midjourney'
 import { createClient } from '~/utils/midjourney'
 
 const SERVER_ID = useStorage('midjourney-server-id', '')
 const CHANNEL_ID = useStorage('midjourney-channel-id', '')
 const SALAI_TOKEN = useStorage('midjourney-salai-token', '')
 
-const client = ref()
+const client = ref<Midjourney>()
 
 const midjourneyKeywords = useStorage('midjourney-keywords', {
   common: '',
@@ -16,13 +17,14 @@ const midjourneyKeywords = useStorage('midjourney-keywords', {
   z: '',
 })
 
-function create() {
+async function create() {
   if (!SERVER_ID.value || !CHANNEL_ID.value || !SALAI_TOKEN.value) {
     ElMessage.error('SERVER_ID, CHANNEL_ID, SALAI_TOKEN is required')
     return
   }
 
-  client.value = createClient({
+  client.value?.Close()
+  client.value = await createClient({
     SERVER_ID: SERVER_ID.value,
     CHANNEL_ID: CHANNEL_ID.value,
     SALAI_TOKEN: SALAI_TOKEN.value,
@@ -89,19 +91,25 @@ async function imagineAll() {
 
 <template>
   <div px="5">
-    <div my="2">
-      SERVER_ID <el-input v-model="SERVER_ID" placeholder="SERVER_ID" />
-    </div>
-    <div my="2">
-      CHANNEL_ID <el-input v-model="CHANNEL_ID" placeholder="CHANNEL_ID" />
-    </div>
-    <div my="2">
-      SALAI_TOKEN <el-input v-model="SALAI_TOKEN" placeholder="SALAI_TOKEN" />
-    </div>
+    <el-form label-width="auto">
+      <el-form-item label="Server ID" prop="pass">
+        <el-input v-model="SERVER_ID" type="password" show-password />
+      </el-form-item>
+      <el-form-item label="Channel ID" prop="pass">
+        <el-input v-model="CHANNEL_ID" type="password" show-password />
+      </el-form-item>
+      <el-form-item label="Salai Token" prop="pass">
+        <el-input v-model="SALAI_TOKEN" type="password" show-password />
+      </el-form-item>
 
-    <el-button type="primary" @click="create">
-      Create Client
-    </el-button>
+      <el-form-item>
+        <el-button type="primary" @click="create">
+          Create Client
+        </el-button>
+      </el-form-item>
+    </el-form>
+
+    <div class="py-4" />
 
     <div my="2">
       <el-input v-model="midjourneyKeywords.common" placeholder="COMMON" />
